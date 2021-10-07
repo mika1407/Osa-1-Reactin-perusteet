@@ -2,6 +2,15 @@ import React, { useState } from 'react'
 
 // oikea paikka komponentin määrittelyyn
 const Statistics = (props) => {
+  if (props.all === 0) {
+    return (
+      <div>
+        <p>No feedback given</p>
+      </div>
+    )
+  }
+
+
   return (
       <div>
         <p>good {props.good}</p>
@@ -27,13 +36,9 @@ const App = () => {
 			<button onClick={() => setNeutral(neutral + 1)}>neutral</button>	
 			<button onClick={() => setBad(bad + 1)}>bad</button>
 			<h1>statistics</h1>
-      <Statistics good={good} 
-                  neutral={neutral} 
-                  bad={bad} 
-                  all={good+neutral+bad} 
+      <Statistics good={good} neutral={neutral} bad={bad} all={good+neutral+bad} 
                   average={(good - bad)/(good + neutral + bad)} 
-                  positive={(good)/(good + neutral + bad)*100} 
-                  />
+                  positive={(good)/(good + neutral + bad)*100} />
     </div>
   )
 }
