@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 const StatisticLine = ({text,value, prosent})=>{
     return(
-      <p>{text} {value} {prosent}</p>
+      <td>{text} {value} {prosent}</td>
     )
 }
 // oikea paikka komponentin määrittelyyn
@@ -15,14 +15,16 @@ const Statistics = (props) => {
     )
   }
   return (
-      <div>
-      <StatisticLine text="good" value ={props.good} />
-      <StatisticLine text="neutral" value ={props.neutral} />
-      <StatisticLine text="bad" value ={props.bad} />
-      <StatisticLine text="all" value ={props.all} />
-      <StatisticLine text="average" value ={props.average} />
-      <StatisticLine text="positive" value ={props.positive} prosent="%"/>
-      </div>  
+      <table>
+        <tbody>
+          <tr><StatisticLine text="good" value ={props.good} /></tr>
+          <tr><StatisticLine text="neutral" value ={props.neutral} /></tr>
+          <tr><StatisticLine text="bad" value ={props.bad} /></tr>
+          <tr><StatisticLine text="all" value ={props.all} /></tr>
+          <tr><StatisticLine text="average" value ={props.average} /></tr>
+          <tr><StatisticLine text="positive" value ={props.positive} prosent="%"/></tr>
+        </tbody>
+      </table>  
   )
 }
 
