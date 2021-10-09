@@ -1,60 +1,27 @@
 import React, { useState } from 'react'
 
-const StatisticLine = ({text,value, prosent})=>{
-    return(
-      <td>{text} {value} {prosent}</td>
-    )
-}
-// oikea paikka komponentin määrittelyyn
-const Statistics = (props) => {
-  if (props.all === 0) {
-    return (
-      <div>
-        <p>No feedback given</p>
-      </div>
-    )
-  }
-  return (
-      <table>
-        <tbody>
-          <tr><StatisticLine text="good" value ={props.good} /></tr>
-          <tr><StatisticLine text="neutral" value ={props.neutral} /></tr>
-          <tr><StatisticLine text="bad" value ={props.bad} /></tr>
-          <tr><StatisticLine text="all" value ={props.all} /></tr>
-          <tr><StatisticLine text="average" value ={props.average} /></tr>
-          <tr><StatisticLine text="positive" value ={props.positive} prosent="%"/></tr>
-        </tbody>
-      </table>  
-  )
-}
-
-const Button = ({name,value,setValue})=>{
-    const setToValue = () => {
-        setValue(value+1);     
-    }
-    return(
-    <button onClick={setToValue}>
-        {name}
-    </button>
-    )
-}
-
 const App = () => {
-  // tallenna napit omaan tilaansa
-  const [good, setGood] = useState(0)
-  const [neutral, setNeutral] = useState(0)
-  const [bad, setBad] = useState(0)
+  const anecdotes = [
+    'If it hurts, do it more often.',
+    'Adding manpower to a late software project makes it later!',
+    'The first 90 percent of the code accounts for the first 90 percent of the development time...The remaining 10 percent of the code accounts for the other 90 percent of the development time.',
+    'Any fool can write code that a computer can understand. Good programmers write code that humans can understand.',
+    'Premature optimization is the root of all evil.',
+    'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.',
+    'Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when dianosing patients.'
+  ]
+   
+  const [selected, setSelected] = useState(0)
+
+   const nextAnectode = ()=>setSelected(Math.floor((Math.random()*100)%anecdotes.length))
 
   return (
     <div>
-      <h1>give feedback</h1>
-      <Button name="good" value={good} setValue={setGood} />
-      <Button name="neutral" value={neutral} setValue={setNeutral} />
-      <Button name="bad" value={bad} setValue={setBad} />
-			<h1>statistics</h1>
-      <Statistics good={good} neutral={neutral} bad={bad} all={good+neutral+bad} 
-                  average={(good - bad)/(good + neutral + bad)} 
-                  positive={(good)/(good + neutral + bad)*100} />
+      {anecdotes[selected]}
+      <br/>
+        <button onClick={nextAnectode}>
+            next anecdote
+        </button>
     </div>
   )
 }
