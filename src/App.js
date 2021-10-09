@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 const App = () => {
    const [selected, setSelected] = useState(0)
    const [points, setPoints] = useState([0,0,0,0,0,0,0])
+   const [max, setMax] = useState([0,0])
 
   const anecdotes = [
     'If it hurts, do it more often.',
@@ -21,11 +22,18 @@ const App = () => {
       // kasvatetaan taulukon paikan arvoa yhdellä
       copy[selected] += 1  
       setPoints(copy)
+      // eniten ääniä
+      if(copy[selected]>=max[1])
+      {
+          let newMax = [selected,copy[selected]]
+          setMax(newMax)
+      }
    }
 
 
   return (
     <div>
+      <h1>Anectode of the day</h1> 
       {anecdotes[selected]}
       <br/>
         has {points[selected]} votes
@@ -34,6 +42,11 @@ const App = () => {
         <button onClick={nextAnectode}>
             next anecdote
         </button>
+        <h1>Anectode with most votes</h1> 
+        {anecdotes[max[0]]} 
+        <br/>
+        has {max[1]} votes
+        <br/>
     </div>
   )
 }
