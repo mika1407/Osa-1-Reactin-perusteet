@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 
 const App = () => {
+   const [selected, setSelected] = useState(0)
+   const [points, setPoints] = useState([0,0,0,0,0,0,0])
+
   const anecdotes = [
     'If it hurts, do it more often.',
     'Adding manpower to a late software project makes it later!',
@@ -11,14 +14,23 @@ const App = () => {
     'Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when dianosing patients.'
   ]
    
-  const [selected, setSelected] = useState(0)
-
    const nextAnectode = ()=>setSelected(Math.floor((Math.random()*100)%anecdotes.length))
+
+   const point = () => {
+      const copy = [...points]
+      // kasvatetaan taulukon paikan arvoa yhdellä
+      copy[selected] += 1  
+      setPoints(copy)
+   }
+
 
   return (
     <div>
       {anecdotes[selected]}
       <br/>
+        has {points[selected]} votes
+      <br/>
+        <button onClick = {point}>vote</button>
         <button onClick={nextAnectode}>
             next anecdote
         </button>
